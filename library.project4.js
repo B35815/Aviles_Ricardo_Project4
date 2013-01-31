@@ -76,7 +76,9 @@ var myLibraryNumber = function () {
         console.log("Today's date is :"+today+"<br>");
         console.log("Another date is :"+date+"<br>");
         console.log("Difference between two dates is :" + Math.ceil((date.getTime()-today.getTime())/(day))+" days")
-    
+
+        
+        
         return {
             "numString": numString,
             "numberDecimal": numberDecimal
@@ -100,5 +102,43 @@ var libNum = new myLibraryNumber ();
 
 console.log (libNum.numString ("89"));
 console.log (libNum.numberDecimal);
+
+// Arrays Functions
+
+// Find the smallest value in an array than is greater than a given number.
+    var min = 18,
+        r = [8, 13, 20, 27];
+        function gt(n){
+            return n>this;
+            }
+    console.log (Math.min.apply(0,r.filter(gt, min)));
+
+// Find the total value of just the numbers in an array, even if some of the items are not numbers.
+    var arr = ["fountain", 6, "F", 9, "stop", 13, "D", 21],
+        sum = 0;
+        for (var i=0; i<arr.length; i++) {
+            if (!isNaN(parseInt(arr[i]))) { sum += arr[i];
+        }
+    }
+    console.log(sum);
+
+// Given an array of objects and the name of a key, return the array sorted by the value of that key in each of the objects:
+    var sorted = "";
+    var objSort = {}
+        objSort = ["cat","dog","mouse"];
+        function sortObj(arr){
+            var sortedKeys = new Array();
+            var sortedObj = {};
+            for (var i in arr){
+        sortedKeys.push(i);
+    }
+        sortedKeys.sort();
+            for (var i in sortedKeys){
+            sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
+            sorted += "/" + sortedKeys[i] + "=" + arr[sortedKeys[i]];
+    }
+    console.log (sorted);
+    return sortedObj;
+}   sortObj(objSort);
 
 
