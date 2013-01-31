@@ -64,10 +64,18 @@ var myLibraryNumber = function () {
     var numString = function (number) {
         return Number (number);
     };
-    
+
 // Format a number to use a specific number of decimal places as for money: 2.1 --> 2.10.
     var decimalNumber = 234.8769
         numberDecimal = decimalNumber.toFixed(2);
+
+// Find the number of hours or days difference between two dates.    
+    var today=new Date(),
+        date=new Date(today.getFullYear(), 2, 11),
+        day=1000*60*60*24;
+        console.log("Today's date is :"+today+"<br>");
+        console.log("Another date is :"+date+"<br>");
+        console.log("Difference between two dates is :" + Math.ceil((date.getTime()-today.getTime())/(day))+" days")
     
         return {
             "numString": numString,
@@ -92,3 +100,5 @@ var libNum = new myLibraryNumber ();
 
 console.log (libNum.numString ("89"));
 console.log (libNum.numberDecimal);
+
+
