@@ -1,7 +1,7 @@
 // Ricardo Aviles
 // SDI 1301
 // Assignment Project 4
-// 01/30/2013
+// 01/31/2013
 
 // My Library
 
@@ -48,97 +48,141 @@ string separator, return a string with the first separator changed to the second
     };
     
         return {
-            "checkPhoneNumber": checkPhoneNumber,
-            "checkEmail": checkEmail,
-            "checkUrl": checkUrl,
-            "checkWord": checkWord,
-            "changeInfo": changeInfo
+            "checkPhoneNumber"  : checkPhoneNumber,
+            "checkEmail"        : checkEmail,
+            "checkUrl"          : checkUrl,
+            "checkWord"         : checkWord,
+            "changeInfo"        : changeInfo
         };
 };
 
 // Numbers Functions
 
-/*Given a string version of a number, such as Ò42Ó, return the value as an actual Number
-data type, such as 42.*/
-var myLibraryNumber = function () {
-    var numString = function (number) {
-        return Number (number);
-    };
-
 // Format a number to use a specific number of decimal places as for money: 2.1 --> 2.10.
-    var decimalNumber = 234.8769
-        numberDecimal = decimalNumber.toFixed(2);
-
-// Find the number of hours or days difference between two dates.    
-    var today=new Date(),
-        date=new Date(today.getFullYear(), 2, 11),
-        day=1000*60*60*24;
-        console.log("Today's date is :"+today+"<br>");
-        console.log("Another date is :"+date+"<br>");
-        console.log("Difference between two dates is :" + Math.ceil((date.getTime()-today.getTime())/(day))+" days")
-
-        
-        
-        return {
-            "numString": numString,
-            "numberDecimal": numberDecimal
+var NumberLibrary = function () {
+	var numDecimal = function (num,afterDecimal) {
+            
+        return Number(num.toFixed(afterDecimal));
     };
+
+// Fuzzy-match a number: is the number above or below a number within a certain percent?
+	var fuzNum = function (num,compareNum,percent) {
+		var percentage = (num/compareNum) * 100;
+		if ((num >= compareNum && percentage >= percent) || (num < compareNum && percentage < percent)) {
+			return false;
+		} else {
+			return true;
+		};
+	};
+
+// Find the number of hours or days difference between two dates.
+    var timeBtDates = function (date1,date2) {
+	    var results = [];
+	    var difference = (date1 > date2) ? date1.getTime() - date2.getTime() : date2.getTime() - date1.getTime();
+		results[3] = difference / 1000;
+		results[2] = results[3] / 60;
+		results[1] = results[2] / 60;
+		results[0] = results[1] / 24;
+		return results;
+
+    };
+// Given a string version of a number, such as Ò42Ó, return the value as an actual Number data type, such as 42.
+    var strToNum = function (num) {
+		return Number(num);
+    };
+
+	return {
+		"numDecimal"    : numDecimal,
+		"fuzNum"      : fuzNum,
+		"timeBtDates"   : timeBtDates,
+		"strToNum"      : strToNum
+
+	};
 };
 
 
+// Arrays Functions
+
+var ArrayLibrary = function () {
+// Find the smallest value in an array than is greater than a given number.
+	var smallNumArray = function (array,num) {
+		array.sort(function(a,b){return a-b;});
+		if (num >= array[0] && num < array[array.length-1]) {
+			array.push(num);
+			array.sort(function(a,b){return a-b;});
+			var result = array[array.lastIndexOf(num) + 1];
+			return result;
+		} else {
+			return null;
+		};
+	};
+
+// Find the total value of just the numbers in an array, even if some of the items are not numbers.
+	var totalValNumArray = function (array) {
+		var total = 0;
+		for (var i = 0, j = array.length; i < j; i++) {
+			if (array[i]/1 === array[i]) {
+				total += array[i];
+			};
+		};
+		return total;
+	};
+
+/* Given an array of objects and the name of a key, return the array sorted by the value of Given an array of objects and the name of a key,
+return the array sorted by the value of that key in each of the objects: ÒaÓ + [{a:2},{a:3},{a:1}] --> [{a:1},{a:2},{a:3}].that key in each of the objects: ÒaÓ + [{a:2},{a:3},{a:1}] --> [{a:1},{a:2},{a:3}].
+*/
+	var sortKeyArray = function (array,givenKey) {
+		return (array.sort(function(a,b){return a[givenKey] - b[givenKey];}));
+	};
+	// Finds index of duplicate items in an array *My own addition to the list
+	var dupInArray = function (findItem,array) {
+		var holdIndex = [], index;
+		for (var i = 0, j = array.length; i < j; i++) {
+			if (array[i] === findItem) {
+				index = array.indexOf(array[i],i);
+				holdIndex.push(index);
+			};
+		};
+		return holdIndex;
+	};
+
+	return {
+		"smallNumArray"         : smallNumArray,
+		"totalValNumArray"      : totalValNumArray,
+		"sortKeyArray"          : sortKeyArray,
+	};
+};
+
+// String Tests
+
 console.log ("Results of testing strings: ");
-
 var libStrings = new myLibraryString ();
-
 console.log (libStrings.checkPhoneNumber ("888-867-5309"));
 console.log (libStrings.checkEmail ("Aricardo@yahoo.com"));
 console.log (libStrings.checkUrl ("http://msi.com"));
 console.log (libStrings.checkWord ("eXPerT"));
 console.log (libStrings.changeInfo ("a,e,i", "/"));
 
+// Number Tests
+
 console.log ("Results of testing numbers: ");
+var numLib = NumberLibrary();
+console.log(numLib.numDecimal(4.897));
+console.log(numLib.fuzNum(5, 50, 10));
+console.log(numLib.fuzNum(10, 5, 50));
+var date1 = new Date(2013,1,31);
+var date2 = new Date(2013,1,1);
+var timeConversion = numLib.timeBtDates(date1,date2);
+console.log("Difference in days: " + timeConversion[0] + ", in hours: " + timeConversion[1]);
+console.log(numLib.strToNum("762"));
 
-var libNum = new myLibraryNumber ();
-
-console.log (libNum.numString ("89"));
-console.log (libNum.numberDecimal);
-
-// Arrays Functions
-
-// Find the smallest value in an array than is greater than a given number.
-    var min = 18,
-        r = [8, 13, 20, 27];
-        function gt(n){
-            return n>this;
-            }
-    console.log (Math.min.apply(0,r.filter(gt, min)));
-
-// Find the total value of just the numbers in an array, even if some of the items are not numbers.
-    var arr = ["fountain", 6, "F", 9, "stop", 13, "D", 21],
-        sum = 0;
-        for (var i=0; i<arr.length; i++) {
-            if (!isNaN(parseInt(arr[i]))) { sum += arr[i];
-        }
-    }
-    console.log(sum);
-
-// Given an array of objects and the name of a key, return the array sorted by the value of that key in each of the objects:
-    var sorted = "";
-    var objSort = {}
-        objSort = ["cat","dog","mouse"];
-        function sortObj(arr){
-            var sortedKeys = new Array();
-            var sortedObj = {};
-            for (var i in arr){
-        sortedKeys.push(i);
-    }
-        sortedKeys.sort();
-            for (var i in sortedKeys){
-            sortedObj[sortedKeys[i]] = arr[sortedKeys[i]];
-            sorted += "/" + sortedKeys[i] + "=" + arr[sortedKeys[i]];
-    }
-    console.log (sorted);
-    return sortedObj;
-}   sortObj(objSort);
-
-
+// Array Tests
+console.log("Array Tests");
+var arrLib = ArrayLibrary();
+var numList = [3,7,11,14,18,2,6];
+console.log(arrLib.smallNumArray(numList,1));
+var randomList = [36,"car","cat",23,31,42,"211",5];
+console.log(arrLib.totalValNumArray(randomList));
+var arrayObjects = [{a:2},{a:7},{a:3},{a:8},{a:4},{a:9},{a:5},{a:1},{b:6},{b:1},{b:0},{b:5},{b:2},{b:7},{c:4},{c:9},{c:1},{c:2},{c:5},{c:7}];
+console.log(arrLib.sortKeyArray(arrayObjects,"a"));
+var arrayList = ["Ricardo","Rossy", 546, 633, "Sarah", 745, "John"];
