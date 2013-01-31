@@ -45,9 +45,7 @@ var myLibraryNumber = function () {
         return Number (number);
     };
     
-    var decimalNUmber = function (number) {
-        return Number (number);
-    };
+
     var decimalNumber = 234.8769
         numberDecimal = decimalNumber.toFixed(2);
     
