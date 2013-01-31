@@ -28,6 +28,15 @@ var myLibraryString = function () {
         
         return urlCheck.test (string);
     };
+
+// Title-case a string (split into words, then uppercase the first letter of each word). 
+    var checkWord = function toPascalCase (str) {
+        var array = str.split (/\s|_/);
+            for(var i=0,l = array.length; i<l; i++) {
+                array[i] = array[i].substr(0,1).toUpperCase() + (array[i].length > 1 ? array[i].substr(1).toLowerCase() : "");
+    }
+        return array.join("");
+}
     
 /* Given a string that is a list of things separated by a given string, as well as another
 string separator, return a string with the first separator changed to the second: “a,b,c” +
@@ -42,6 +51,7 @@ string separator, return a string with the first separator changed to the second
             "checkPhoneNumber": checkPhoneNumber,
             "checkEmail": checkEmail,
             "checkUrl": checkUrl,
+            "checkWord": checkWord,
             "changeInfo": changeInfo
         };
 };
@@ -65,20 +75,20 @@ var myLibraryNumber = function () {
     };
 };
 
+
 console.log ("Results of testing strings: ");
 
-var libStrings = myLibraryString ();
+var libStrings = new myLibraryString ();
 
 console.log (libStrings.checkPhoneNumber ("888-867-5309"));
 console.log (libStrings.checkEmail ("Aricardo@yahoo.com"));
 console.log (libStrings.checkUrl ("http://msi.com"));
+console.log (libStrings.checkWord ("eXPerT"));
 console.log (libStrings.changeInfo ("a,e,i", "/"));
-
-// Numbers
 
 console.log ("Results of testing numbers: ");
 
-var libNum = myLibraryNumber ();
+var libNum = new myLibraryNumber ();
 
 console.log (libNum.numString ("89"));
 console.log (libNum.numberDecimal);
