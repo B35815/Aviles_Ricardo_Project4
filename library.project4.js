@@ -3,11 +3,18 @@
 // Assignment Project 4
 // 01/31/2013
 
+
+// Make Up: Renamed js file Project 2
 // My Library
 
 // String Functions
 
 // Does a string follow a 123-456-7890 pattern like a phone number?
+// Make Up: Missing Boolean nested conditionals Project 3
+// Make Up: Conditionals empty blocks Project 3
+// Make Up: Some Global Variables Project 2
+// Make Up: Return Values not in use Project 3
+// Make Up: Flowchart Terminator should contain name of function/method Project 3
 var myLibraryString = function () {
     var checkPhoneNumber = function (string) {
         var numberCheck = /\d{3}\-\d{3}\-\d{4}/;
@@ -29,7 +36,8 @@ var myLibraryString = function () {
         return urlCheck.test (string);
     };
 
-// Title-case a string (split into words, then uppercase the first letter of each word). 
+// Title-case a string (split into words, then uppercase the first letter of each word).
+// Make Up: Missing Loop Project 2
     var checkWord = function toPascalCase (str) {
         var array = str.split (/\s|_/);
             for(var i=0,l = array.length; i<l; i++) {
@@ -46,7 +54,7 @@ string separator, return a string with the first separator changed to the second
         
         return string.replace (infoChange.newInfo);
     };
-    
+// Make Up: Missing the return of values on some functions Project 2   
         return {
             "checkPhoneNumber"  : checkPhoneNumber,
             "checkEmail"        : checkEmail,
@@ -66,6 +74,8 @@ var NumberLibrary = function () {
     };
 
 // Fuzzy-match a number: is the number above or below a number within a certain percent?
+// Make Up: Missing the use of ( || ) on Project 2
+// Make Up: Add "else" only when required, if no string on else no need to add Project 3
 	var fuzNum = function (num,compareNum,percent) {
 		var percentage = (num/compareNum) * 100;
 		if ((num >= compareNum && percentage >= percent) || (num < compareNum && percentage < percent)) {
@@ -76,6 +86,7 @@ var NumberLibrary = function () {
 	};
 
 // Find the number of hours or days difference between two dates.
+// Make Up: Missing Math on Project 1
     var timeDates = function (date1,date2) {
 	    var results = [];
 	    var difference = (date1 > date2) ? date1.getTime() - date2.getTime() : date2.getTime() - date1.getTime();
@@ -102,7 +113,7 @@ var NumberLibrary = function () {
 
 
 // Arrays Functions
-
+// Make Up: Missing Arrays and Methods Project 2
 var ArrayLibrary = function () {
 // Find the smallest value in an array than is greater than a given number.
 	var smallNumArray = function (array,num) {
@@ -134,17 +145,6 @@ return the array sorted by the value of that key in each of the objects: “a” + [
 	var sortKeyArray = function (array,givenKey) {
 		return (array.sort(function(a,b){return a[givenKey] - b[givenKey];}));
 	};
-	// Finds index of duplicate items in an array *My own addition to the list
-	var dupInArray = function (findItem,array) {
-		var holdIndex = [], index;
-		for (var i = 0, j = array.length; i < j; i++) {
-			if (array[i] === findItem) {
-				index = array.indexOf(array[i],i);
-				holdIndex.push(index);
-			};
-		};
-		return holdIndex;
-	};
 
 	return {
 		"smallNumArray"         : smallNumArray,
@@ -153,6 +153,7 @@ return the array sorted by the value of that key in each of the objects: “a” + [
 	};
 };
 
+// Make Up: Missing Outputs on Project 2
 // String Tests
 
 console.log ("Results of testing strings: ");
