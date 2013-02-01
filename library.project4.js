@@ -76,7 +76,7 @@ var NumberLibrary = function () {
 	};
 
 // Find the number of hours or days difference between two dates.
-    var timeBtDates = function (date1,date2) {
+    var timeDates = function (date1,date2) {
 	    var results = [];
 	    var difference = (date1 > date2) ? date1.getTime() - date2.getTime() : date2.getTime() - date1.getTime();
 		results[3] = difference / 1000;
@@ -94,7 +94,7 @@ var NumberLibrary = function () {
 	return {
 		"numDecimal"    : numDecimal,
 		"fuzNum"      : fuzNum,
-		"timeBtDates"   : timeBtDates,
+		"timeDates"   : timeDates,
 		"strToNum"      : strToNum
 
 	};
@@ -172,7 +172,7 @@ console.log(numLib.fuzNum(5, 50, 10));
 console.log(numLib.fuzNum(10, 5, 50));
 var date1 = new Date(2013,1,31);
 var date2 = new Date(2013,1,1);
-var timeConversion = numLib.timeBtDates(date1,date2);
+var timeConversion = numLib.timeDates(date1,date2);
 console.log("Difference in days: " + timeConversion[0] + ", in hours: " + timeConversion[1]);
 console.log(numLib.strToNum("762"));
 
